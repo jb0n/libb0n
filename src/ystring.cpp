@@ -40,9 +40,10 @@ vector<ystring> ystring::split(ystring delim, int max_fields)
     string::size_type start = 0;
     string::size_type end = this->find(delim);
     string entry;
+    size_t real_end = this->size();
 
     vector<ystring> ret;
-    while (start != end)
+    while (start != end || end < real_end)
     {
         if (string::npos == end)
         {
@@ -59,7 +60,7 @@ vector<ystring> ystring::split(ystring delim, int max_fields)
 
         if (max_fields > 0)
         {
-            if ((int)ret.size() == (max_fields-1)) //get the last one
+            if ((int)ret.size() == (max_fields)) //get the last one
             {
                 entry = string(*this, start, this->size() - start);
                 ret.push_back(entry);
