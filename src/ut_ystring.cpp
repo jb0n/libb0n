@@ -15,6 +15,32 @@ void YstringTestCase::checkConstructing()
     ystring *ystr2 = new ystring("zzz");
     CPPUNIT_ASSERT(*ystr2 == "zzz");
     delete ystr2;
+
+    ystring ystr3;
+    ystr3 = "QQQ";
+    CPPUNIT_ASSERT(ystr3 ==  "QQQ");
+
+    //TODO: get the rest of the std::string constructors to test!
+
+
+}
+
+void YstringTestCase::checkReplace()
+{
+    ystring ystr("xxx");
+    ystr = ystr.replace("x", "f");
+    CPPUNIT_ASSERT(ystr == "fff");
+
+    ystr = "abc_abc_abc";
+    ystr = ystr.replace("abc", "XYZ", 2);
+    CPPUNIT_ASSERT(ystr == "XYZ_XYZ_abc");
+
+
+}
+
+void YstringTestCase::checkSplit()
+{
+
 }
 
 int main(int, char**)

@@ -13,6 +13,12 @@ public:
     ystring &format(const char *, ...); //vsnprintf wrapper
     std::vector<ystring> split(ystring, int max_fields=-1); //works like python
 
+
+    //std::string c'tors
+    ystring() {}
+    ystring(const char *in): std::string(in) {}
+
+
     //override assignment ops
     ystring(const std::string &str): std::string(str) {}
 };
