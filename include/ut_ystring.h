@@ -16,12 +16,14 @@ class YstringTestCase: public CppUnit::TestCase
         CPPUNIT_TEST(checkConstructing);
         CPPUNIT_TEST(checkReplace);
         CPPUNIT_TEST(checkSplit);
+        CPPUNIT_TEST(checkFormat);
     CPPUNIT_TEST_SUITE_END();
 
 protected:
     void checkConstructing();
     void checkReplace();
     void checkSplit();
+    void checkFormat();
 };
 
 

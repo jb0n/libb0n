@@ -1,12 +1,12 @@
 
 #include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
 
 #include <b0n_settings.h>
 #include <ystring.h>
 
-#include <iostream>
-
-//B0N_MAX_STACK_ALLOC
+#include <stdexcept>
 
 using namespace std;
 
@@ -71,6 +71,46 @@ vector<ystring> ystring::split(ystring delim, int max_fields)
     return ret;
 }
 
+ystring &ystring::format(const char *fmt, ...)
+{
+    char buff[B0N_MAX_STACK_ALLOC];
+    va_list vargs;
+    va_start(vargs, fmt);
+    int ret = vsnprintf(buff, sizeof(buff), fmt, vargs);
+    va_end(vargs);
+
+    if (ret < 0)
+    {
+        throw runtime_error("Something strange went on (vsnprintf ret -1)");
+    }
+    else if (sizeof(buff) > (size_t)ret) //it worked
+    {
+        *this = buff;
+        return *this;
+    }
+
+    //16k failed, try to get some heap memory to do it with
+    size_t needed = ret + 1;
+    char *pbuf = new char[needed];
+    va_start(vargs, fmt);
+    ret = vsnprintf(pbuf, needed, fmt, vargs);
+    va_end(vargs);
+
+    if (ret < 0)
+    {
+        delete[] pbuf;
+        throw runtime_error("Something strange went on (vsnprintf ret -1)");
+    }
+    else if (needed > (size_t)ret)
+    {
+        delete[] pbuf;
+        throw runtime_error("Something strange went on (vsnprintf misreported "
+                            "size!?)");
+    }
+    *this = pbuf;
+    delete[] pbuf;
+    return *this;
+}
 
 } //b0n namespace
 

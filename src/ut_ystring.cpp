@@ -22,8 +22,6 @@ void YstringTestCase::checkConstructing()
     CPPUNIT_ASSERT(ystr3 ==  "QQQ");
 
     //TODO: get the rest of the std::string constructors to test!
-
-
 }
 
 void YstringTestCase::checkReplace()
@@ -67,6 +65,14 @@ void YstringTestCase::checkSplit()
     tmp.push_back("");
     CPPUNIT_ASSERT(yv == tmp);
 }
+
+void YstringTestCase::checkFormat()
+{
+    ystring ystr;
+    ystr.format("%s %d %s", "I have", 99, "problems");
+    CPPUNIT_ASSERT("I have 99 problems" == ystr);
+}
+
 
 int main(int, char**)
 {
