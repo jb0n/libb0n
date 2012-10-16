@@ -121,6 +121,25 @@ void YstringTestCase::checkStrip()
     CPPUNIT_ASSERT("xxx" == trimmed);
 }
 
+void YstringTestCase::checkStartsWith()
+{
+    ystring tstr = "xxx123";
+    CPPUNIT_ASSERT(false == tstr.startswith("xxx1231"));
+    CPPUNIT_ASSERT(false == tstr.startswith("Z"));
+    CPPUNIT_ASSERT(true == tstr.startswith(""));
+    CPPUNIT_ASSERT(true == tstr.startswith("xxx123"));
+    CPPUNIT_ASSERT(true == tstr.startswith("xxx"));
+}
+
+void YstringTestCase::checkEndsWith()
+{
+    ystring tstr = "xxx123";
+    CPPUNIT_ASSERT(false == tstr.endswith("xxx1231"));
+    CPPUNIT_ASSERT(false == tstr.endswith("Z"));
+    CPPUNIT_ASSERT(true == tstr.endswith(""));
+    CPPUNIT_ASSERT(true == tstr.endswith("xxx123"));
+    CPPUNIT_ASSERT(true == tstr.endswith("123"));
+}
 
 int main(int, char**)
 {

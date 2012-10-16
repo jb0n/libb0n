@@ -48,6 +48,8 @@ class YstringTestCase: public CppUnit::TestCase
         CPPUNIT_TEST(checkLstrip);
         CPPUNIT_TEST(checkRstrip);
         CPPUNIT_TEST(checkStrip);
+        CPPUNIT_TEST(checkStartsWith);
+        CPPUNIT_TEST(checkEndsWith);
     CPPUNIT_TEST_SUITE_END();
 
 protected:
@@ -58,6 +60,8 @@ protected:
     void checkLstrip();
     void checkRstrip();
     void checkStrip();
+    void checkStartsWith();
+    void checkEndsWith();
 };
 
 

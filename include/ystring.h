@@ -47,6 +47,8 @@ public:
     ystring rstrip();
     ystring lstrip();
     ystring strip();
+    bool startswith(const ystring&);
+    bool endswith(const ystring&);
 
     //std::string c'tors
     ystring() {}

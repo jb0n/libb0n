@@ -164,5 +164,26 @@ ystring ystring::strip()
     return this->lstrip().rstrip();
 }
 
+bool ystring::startswith(const ystring &start)
+{
+    size_t startlen = start.length();
+    if (length() < startlen)
+    {
+        return false;
+    }
+    return (0 == compare(0, startlen, start)); 
+}
+
+bool ystring::endswith(const ystring &end)
+{
+    size_t endlen = end.length();
+    if (length() < endlen)
+    {
+        return false;
+    }
+    return (0 == compare(length() - endlen, endlen, end));
+}
+
+
 } //b0n namespace
 
